@@ -25,13 +25,13 @@ public class PartyApi {
         return new PartyOutput();
     }
 
-    @PutMapping("/")
+    @PostMapping("/")
     @ApiOperation(value = "Create new party")
     public PartyOutput create(@RequestBody PartyInput partyInput){
         return new PartyOutput();
     }
 
-    @PostMapping("/{partyId}")
+    @PutMapping("/{partyId}")
     @ApiOperation(value = "Update party")
     public PartyOutput update(@PathVariable Long partyId, @RequestBody PartyInput partyInput){
         return new PartyOutput();
