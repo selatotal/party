@@ -108,7 +108,7 @@ public class PartyService {
         if (StringUtils.isBlank(partyInput.getCode())){
             throw new GenericOutputException("Invalid Code");
         }
-        if (partyInput.getNumber() == null){
+        if (partyInput.getNumber() == null || partyInput.getNumber() < 10 || partyInput.getNumber() > 99){
             throw new GenericOutputException("Invalid Party Number");
         }
     }
