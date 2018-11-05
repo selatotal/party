@@ -102,7 +102,7 @@ public class PartyService {
     }
 
     private void validateInput(PartyInput partyInput){
-        if (StringUtils.isBlank(partyInput.getName())){
+        if (StringUtils.isBlank(partyInput.getName()) || partyInput.getName().trim().length() < 5){
             throw new GenericOutputException("Invalid Name");
         }
         if (StringUtils.isBlank(partyInput.getCode())){
