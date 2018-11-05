@@ -22,7 +22,7 @@ public class PartyService {
     private final ModelMapper modelMapper;
 
     private static final String MESSAGE_INVALID_ID = "Invalid id";
-    private static final String MESSAGE_VOTER_NOT_FOUND = "Candidate not found";
+    private static final String MESSAGE_PARTY_NOT_FOUND = "Party not found";
 
     @Autowired
     public PartyService(PartyRepository partyRepository, ModelMapper modelMapper){
@@ -31,8 +31,8 @@ public class PartyService {
     }
 
     public List<PartyOutput> getAll(){
-        List<Party> candidateList = (List<Party>)partyRepository.findAll();
-        return candidateList.stream().map(Party::toPartyOutput).collect(Collectors.toList());
+        List<Party> partyList = (List<Party>)partyRepository.findAll();
+        return partyList.stream().map(Party::toPartyOutput).collect(Collectors.toList());
     }
 
     public PartyOutput create(PartyInput partyInput) {
@@ -50,7 +50,7 @@ public class PartyService {
 
         Party party = partyRepository.findById(partyId).orElse(null);
         if (party == null){
-            throw new GenericOutputException(MESSAGE_VOTER_NOT_FOUND);
+            throw new GenericOutputException(MESSAGE_PARTY_NOT_FOUND);
         }
 
         return modelMapper.map(party, PartyOutput.class);
@@ -65,7 +65,7 @@ public class PartyService {
 
         Party party = partyRepository.findById(partyId).orElse(null);
         if (party == null){
-            throw new GenericOutputException(MESSAGE_VOTER_NOT_FOUND);
+            throw new GenericOutputException(MESSAGE_PARTY_NOT_FOUND);
         }
 
         party.setCode(partyInput.getCode());
@@ -82,12 +82,12 @@ public class PartyService {
 
         Party party = partyRepository.findById(partyId).orElse(null);
         if (party == null){
-            throw new GenericOutputException(MESSAGE_VOTER_NOT_FOUND);
+            throw new GenericOutputException(MESSAGE_PARTY_NOT_FOUND);
         }
 
         partyRepository.delete(party);
 
-        return new GenericOutput("Candidate deleted");
+        return new GenericOutput("Party deleted");
     }
 
     private void validateDuplicate(PartyInput partyInput, Long id){
